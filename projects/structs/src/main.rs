@@ -6,6 +6,14 @@ struct User {
     sign_in_count: u64,
 }
 
+//Listing 5-10: Defining a Rectangle struct
+//Listing 5-12: Adding the attribute to derive the Debug trait
+#[derive(Debug)]
+struct Rectangle {
+    height: u32,
+    width: u32,
+}
+
 fn main() {
     println!("Hello, Structs!");
 
@@ -43,6 +51,31 @@ fn main() {
     println!("Building a new user...");
     let user3 = build_user(String::from("functionaluser@gmail.com"), String::from("funcy_user"));
     println!("Signin Count: {}, Status: {}", user3.sign_in_count, user3.active);
+
+    let scale = 2;
+    // Listing 5-10 - Declaring and instance of Rectangle struct
+    let rect1 = Rectangle {
+        width: dbg!(30 * scale),
+        height: 50,
+    };
+
+    // Listng 5-11: Attemping to print Rectangle instance
+    println!("rect 1 is {:?}", rect1);
+
+    // debug prints to stderr instead of stdout
+    dbg!(&rect1);
+
+    // Listing 5-10 - Passing Reference to fn area
+    println!(
+        "The area of the rectangle is {} square pixels.",
+        area(&rect1)
+        );
+
+}
+
+// Listing 5-10 - expression returns area using the . separator
+fn area(rectangle: &Rectangle) -> u32 {
+    rectangle.width * rectangle.height
 }
 
 // Listing 5-4: A build_user fn that takes an email and username
